@@ -97,7 +97,7 @@ function validate_age(form) {
         return null;
     }
     var age = parseInt(ageString);
-    if (age < 10 || age > 150) {
+    if (age < 18 || age > 150) {
         set_error("age-widget");
         return null;
     }
