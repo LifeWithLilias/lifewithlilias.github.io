@@ -173,7 +173,7 @@ var render_daily_nutrients = function (daily_nutrients) { return ((0, jsx_1.crea
             "g")))); };
 var Calculator = function () { return ((0, jsx_1.createElement)("div", { class: "macro-calc-container" },
     (0, jsx_1.createElement)("h1", { class: "title" }, "Feel Your Best Formula"),
-    (0, jsx_1.createElement)("h2", { class: "subtitle" }, "Macro Calorie Calculator by Lilias Lewis"),
+    (0, jsx_1.createElement)("h2", { class: "subtitle" }, "Macro + Calorie Calculator by Lilias Lewis"),
     (0, jsx_1.createElement)("img", { class: "profile-pic", src: "https://lifewithlilias.github.io/assets/profile_pic.png" }),
     (0, jsx_1.createElement)("form", { onSubmit: function (e) { return (0, calc_form_1.onSubmit)(e, render_outputs); }, id: "macro-calc-form" },
         (0, jsx_1.createElement)("div", { id: "gender-widget", class: "widget" },
