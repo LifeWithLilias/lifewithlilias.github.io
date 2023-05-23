@@ -14,9 +14,12 @@ function calculate(inputs) {
     var bmr = inputs.sex == "male" ? base_bmr + 5 : base_bmr - 161;
     var tdee = bmr * TDEE_MULTIPLIER[inputs.energy_lvl];
     var tdee_weightloss = 0.85 * tdee;
+    var height_meters = inputs.height_cm / 100;
+    var bmi = lbs_to_kg(inputs.weight_lbs) / (height_meters * height_meters);
     return {
         maintenance: calculate_daily_nutrients(inputs.sex, tdee, inputs.weight_lbs),
         weight_loss: calculate_daily_nutrients(inputs.sex, tdee_weightloss, inputs.weight_lbs),
+        bmi: bmi,
     };
 }
 exports.calculate = calculate;
@@ -141,11 +144,16 @@ var jsx_1 = require("./jsx");
 var calc_form_1 = require("./calc_form");
 var render_outputs = function (outputs) { return ((0, jsx_1.createElement)("div", { class: "outputs" },
     (0, jsx_1.createElement)("div", null,
-        (0, jsx_1.createElement)("h1", null, "Maintenance"),
-        render_daily_nutrients(outputs.maintenance)),
+        (0, jsx_1.createElement)("div", null,
+            (0, jsx_1.createElement)("h1", null, "Maintenance"),
+            render_daily_nutrients(outputs.maintenance)),
+        (0, jsx_1.createElement)("div", null,
+            (0, jsx_1.createElement)("h1", null, "Weight Loss"),
+            render_daily_nutrients(outputs.weight_loss))),
     (0, jsx_1.createElement)("div", null,
-        (0, jsx_1.createElement)("h1", null, "Weight Loss"),
-        render_daily_nutrients(outputs.weight_loss)))); };
+        (0, jsx_1.createElement)("div", null,
+            (0, jsx_1.createElement)("h1", null, "BMI"),
+            (0, jsx_1.createElement)("div", { class: "font-semibold text-2xl text-center" }, outputs.bmi.toFixed()))))); };
 var render_daily_nutrients = function (daily_nutrients) { return ((0, jsx_1.createElement)("div", { class: "daily-nutrients" },
     (0, jsx_1.createElement)("div", { class: "daily-calories" },
         (0, jsx_1.createElement)("div", { class: "label" }, "Daily Calories"),
@@ -210,8 +218,7 @@ var Calculator = function () { return ((0, jsx_1.createElement)("div", { class: 
                     (0, jsx_1.createElement)("option", { value: "8" }, "8"),
                     (0, jsx_1.createElement)("option", { value: "9" }, "9"),
                     (0, jsx_1.createElement)("option", { value: "10" }, "10"),
-                    (0, jsx_1.createElement)("option", { value: "11" }, "11"),
-                    (0, jsx_1.createElement)("option", { value: "12" }, "12")),
+                    (0, jsx_1.createElement)("option", { value: "11" }, "11")),
                 (0, jsx_1.createElement)("label", { for: "height-inch" }, "in."))),
         (0, jsx_1.createElement)("div", { id: "weight-widget", class: "widget" },
             (0, jsx_1.createElement)("label", { for: "weight-lbs" }, "Weight: "),
@@ -307,4 +314,4 @@ var createFragment = function (_) {
 };
 exports.createFragment = createFragment;
 
-},{}]},{},[1,2,3,4,5]);
+},{}]},{},[2,1,3,4,5]);
