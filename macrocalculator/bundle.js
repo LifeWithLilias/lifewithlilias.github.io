@@ -37,7 +37,7 @@ function calculate_daily_nutrients(sex, daily_cals, weight_lbs) {
     };
 }
 function lbs_to_kg(lbs) {
-    return lbs / 2.2;
+    return lbs / 2.20462;
 }
 
 },{}],2:[function(require,module,exports){
@@ -153,7 +153,7 @@ var render_outputs = function (outputs) { return ((0, jsx_1.createElement)("div"
     (0, jsx_1.createElement)("div", null,
         (0, jsx_1.createElement)("div", null,
             (0, jsx_1.createElement)("h1", null, "BMI"),
-            (0, jsx_1.createElement)("div", { class: "font-semibold text-2xl text-center" }, outputs.bmi.toFixed()))))); };
+            (0, jsx_1.createElement)("div", { class: "font-semibold text-2xl text-center" }, outputs.bmi.toFixed(1)))))); };
 var render_daily_nutrients = function (daily_nutrients) { return ((0, jsx_1.createElement)("div", { class: "daily-nutrients" },
     (0, jsx_1.createElement)("div", { class: "daily-calories" },
         (0, jsx_1.createElement)("div", { class: "label" }, "Daily Calories"),
