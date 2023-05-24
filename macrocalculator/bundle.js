@@ -146,7 +146,7 @@ function onChangeEnergyLevel(e) {
     var elem = document.getElementById('energy-lvl-' + target.value);
     elem.classList.remove('energy-lvl-light');
     var btn = document.getElementById('submit-btn');
-    btn.scrollIntoView({ behavior: 'smooth' });
+    btn.scrollIntoView({ behavior: 'smooth', block: 'center' });
 }
 exports.onChangeEnergyLevel = onChangeEnergyLevel;
 
