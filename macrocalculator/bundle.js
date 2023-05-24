@@ -43,7 +43,7 @@ function lbs_to_kg(lbs) {
 },{}],2:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.onSubmit = void 0;
+exports.onChangeEnergyLevel = exports.onSubmit = void 0;
 var calc_1 = require("./calc");
 function run_validation(v, f) {
     var obj = {};
@@ -135,6 +135,20 @@ function onSubmit(event, render_outputs) {
     });
 }
 exports.onSubmit = onSubmit;
+function onChangeEnergyLevel(e) {
+    var ENERGY_LEVELS = ['sedentary', 'light', 'moderate', 'very', 'extremely'];
+    var target = e.target;
+    var other_levels = ENERGY_LEVELS.filter(function (lvl) { return lvl != target.value; });
+    other_levels.forEach(function (lvl) {
+        var elem = document.getElementById('energy-lvl-' + lvl);
+        elem.classList.add('energy-lvl-light');
+    });
+    var elem = document.getElementById('energy-lvl-' + target.value);
+    elem.classList.remove('energy-lvl-light');
+    var btn = document.getElementById('submit-btn');
+    btn.scrollIntoView({ behavior: 'smooth' });
+}
+exports.onChangeEnergyLevel = onChangeEnergyLevel;
 
 },{"./calc":1}],3:[function(require,module,exports){
 "use strict";
@@ -229,15 +243,32 @@ var Calculator = function () { return ((0, jsx_1.createElement)("div", { class: 
             (0, jsx_1.createElement)("label", { for: "age-yrs" }, "Age: "),
             (0, jsx_1.createElement)("input", { type: "number", id: "age-yrs", name: "age-yrs" })),
         (0, jsx_1.createElement)("div", { class: "widget" },
-            (0, jsx_1.createElement)("label", { for: "energy-lvl" }, "Activity Level: "),
-            (0, jsx_1.createElement)("select", { id: "energy-lvl", name: "energy-lvl" },
-                (0, jsx_1.createElement)("option", { value: "sedentary" }, "< 3000 steps per day, no workouts"),
-                (0, jsx_1.createElement)("option", { value: "light" }, "3000-5000 steps per day, 1-2 light workouts per week"),
-                (0, jsx_1.createElement)("option", { value: "moderate" }, "5000- 10,000 steps per day, 3-5 moderate workouts per week"),
-                (0, jsx_1.createElement)("option", { value: "very" }, "10,000-20,000 steps per day, 6-7 heavy workouts per week"),
-                (0, jsx_1.createElement)("option", { value: "extremely" }, "20,000+ steps per day, 7+ workouts per week"))),
+            (0, jsx_1.createElement)("label", { class: "my-1", for: "energy-lvl" }, "Activity Level: "),
+            (0, jsx_1.createElement)("div", { class: "flex flex-col" },
+                (0, jsx_1.createElement)("select", { id: "energy-lvl", name: "energy-lvl", onChange: function (e) { return (0, calc_form_1.onChangeEnergyLevel)(e); } },
+                    (0, jsx_1.createElement)("option", { value: "sedentary" }, "Sedentary"),
+                    (0, jsx_1.createElement)("option", { value: "light" }, "Lightly Active"),
+                    (0, jsx_1.createElement)("option", { value: "moderate" }, "Moderately Active"),
+                    (0, jsx_1.createElement)("option", { value: "very" }, "Very Active"),
+                    (0, jsx_1.createElement)("option", { value: "extremely" }, "Extremely Active")),
+                (0, jsx_1.createElement)("div", { class: "energy-lvls" },
+                    (0, jsx_1.createElement)("div", { id: "energy-lvl-sedentary" },
+                        (0, jsx_1.createElement)("span", null, "Sedentary"),
+                        ": Less than 3000 steps per day, no workouts"),
+                    (0, jsx_1.createElement)("div", { id: "energy-lvl-light" },
+                        (0, jsx_1.createElement)("span", null, "Lightly Active"),
+                        ": 3000-5000 steps per day, 1-2 light workouts per week"),
+                    (0, jsx_1.createElement)("div", { id: "energy-lvl-moderate" },
+                        (0, jsx_1.createElement)("span", null, "Moderately Active"),
+                        ": 5000- 10,000 steps per day, 3-5 moderate workouts per week"),
+                    (0, jsx_1.createElement)("div", { id: "energy-lvl-very" },
+                        (0, jsx_1.createElement)("span", null, "Very Active"),
+                        ": 10,000-20,000 steps per day, 6-7 heavy workouts per week"),
+                    (0, jsx_1.createElement)("div", { id: "energy-lvl-extremely" },
+                        (0, jsx_1.createElement)("span", null, "Extremely Active"),
+                        ": 20,000+ steps per day, 7+ workouts per week")))),
         (0, jsx_1.createElement)("div", { class: "flex flex-row" },
-            (0, jsx_1.createElement)("button", { class: "mx-auto submit-btn", type: "submit" },
+            (0, jsx_1.createElement)("button", { id: "submit-btn", class: "mx-auto submit-btn", type: "submit" },
                 (0, jsx_1.createElement)("i", { class: "material-icons", style: "font-size: 36px;" }, "calculate"),
                 (0, jsx_1.createElement)("span", null, "Calculate")))),
     (0, jsx_1.createElement)("div", { id: "macro-calc-output" }))); };
@@ -314,4 +345,4 @@ var createFragment = function (_) {
 };
 exports.createFragment = createFragment;
 
-},{}]},{},[2,1,3,4,5]);
+},{}]},{},[1,2,3,4,5]);
